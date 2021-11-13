@@ -1,0 +1,13 @@
+---
+# base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app: kustomize
+  version: demo02
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+- deployment.yml
+- svc.yml
+- ingress.yml

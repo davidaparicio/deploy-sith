@@ -1,0 +1,23 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hello
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: hello
+          image: registry.gitlab.com/gitops-heros/sith:0.1
+          env:
+          - name: ENV
+            value: "production"
+          resources:
+            limits:
+              cpu: "1.2"
+              memory: "32Mi"
+            requests:
+              cpu: "0.4"
+              memory: "16Mi"
+

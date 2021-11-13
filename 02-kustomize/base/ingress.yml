@@ -1,0 +1,18 @@
+# ----- Ingress -----
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hello
+  labels:
+    app: hello
+  annotations:
+    link.argocd.argoproj.io/external-link: http://yolo.127.0.0.1.sslip.io
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`yolo.127.0.0.1.sslip.io`)
+    kind: Rule
+    services:
+    - name: hello
+      port: 80

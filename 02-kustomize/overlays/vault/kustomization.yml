@@ -1,0 +1,11 @@
+---
+# overlay staging
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+- ../../base
+resources:
+- secrets-store.yml
+patchesStrategicMerge:
+- deployment.yml
+- ingress.yml
