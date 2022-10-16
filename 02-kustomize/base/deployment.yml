@@ -18,6 +18,11 @@ spec:
       containers:
         - name: hello
           image: louiznk/helloworld-go:1.0
+          env:
+          - name: NS
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
           ports:
             - name: web
               containerPort: 8080

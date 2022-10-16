@@ -19,3 +19,14 @@ do
         sed -i "s/$LINK_DNS/$DNS/g" $FILE
     fi
 done
+for FILE in `grep --include=*.dhall -rnw "$DIR" -e "sslip.io" -l`
+do
+    echo "🪄 Update $FILE"
+
+    LINK_DNS=$(grep $FILE -e "let .*sslip.io" | cut -d " " -f6- | cut -d "." -f2- | tr -d '"')
+    if [[ "x$LINK_DNS" != "x" && "x$LINK_DNS" != "x$DNS" ]]
+    then
+        echo "$LINK_DNS -> $DNS"
+        sed -i "s/$LINK_DNS/$DNS/g" $FILE
+    fi
+done

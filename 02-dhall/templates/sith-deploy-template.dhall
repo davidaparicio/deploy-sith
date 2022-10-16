@@ -28,7 +28,8 @@ let deployment =
             , image = Some config.image
             , env = if null Text (config.environnement)
               then None (List kubernetes.EnvVar.Type)
-              else Some [ kubernetes.EnvVar::{ name = "ENV", value = config.environnement } ] 
+              else Some [ kubernetes.EnvVar::{ name = "ENV", value = config.environnement }, 
+                kubernetes.EnvVar::{ name = "NS", valueFrom = Some kubernetes.EnvVarSource::{ fieldRef = Some kubernetes.ObjectFieldSelector::{ fieldPath = "metadata.namespace" } } }  ] 
             , ports = Some [ kubernetes.ContainerPort::{ 
               containerPort = config.containerPort,
               name = config.portName,
@@ -55,3 +56,5 @@ let deployment =
   }
 
 in deployment
+
+-- Some fieldRef.fieldPath::{"metadata.namespace"} 
