@@ -54,7 +54,7 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if or .Values.secrets.create .Values.sealedSecrets.create  }}
+          {{- if or .Values.secrets.create .Values.sealedSecrets.create .Values.secretsStore.create }}
           volumeMounts:
           - name: secret-volume
             mountPath: "/etc/sith/"
@@ -65,6 +65,15 @@ spec:
         - name: secret-volume
           secret:
             secretName: james-secrets
+      {{- end }}
+      {{- if or .Values.secretsStore.create }}
+      volumes:
+        - name: secret-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "vault-james-secret"
       {{- end }}
 
       {{- with .Values.nodeSelector }}

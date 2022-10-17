@@ -5,11 +5,7 @@ kind: Kustomization
 bases:
 - ../../base
 resources:
-- sealedsecret.yml
-# secretGenerator:
-# - name: james-other-secrets
-#   envs:
-#   - .env.secret
+- secrets-store.yml
 patchesStrategicMerge:
 - deployment.yml
 - ingress.yml
