@@ -1,4 +1,4 @@
---- ConfigRule
+--- sith-config-ingress-rule.dhall
 {
   Type =
   { 

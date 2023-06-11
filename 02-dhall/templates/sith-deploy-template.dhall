@@ -4,6 +4,8 @@ let kubernetes = https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/v
 
 let null = https://prelude.dhall-lang.org/v21.1.0/Optional/null.dhall sha256:3871180b87ecaba8b53fffb2a8b52d3fce98098fab09a6f759358b9e8042eedc
 
+let default = https://prelude.dhall-lang.org/v21.1.0/Text/default.dhall sha256:f532c8891b1e427d90a6cc07cf7e793a4c84b0765e1bfe69f186ee2ec91c1edf
+
 let ConfigDeploy = ../types/sith-config-deploy.dhall
 
 
@@ -42,13 +44,19 @@ let deployment =
               httpGet = Some kubernetes.HTTPGetAction::{ path = Some config.livenessProbe.path, port = config.livenessProbe.port  } 
             }
             , volumeMounts = if null Text (config.secretName)
-              then None (List kubernetes.VolumeMount.Type)
+              then None (List kubernetes.VolumeMount.Type)            
               else Some [ kubernetes.VolumeMount::{mountPath = "/etc/sith", name = "secret-volume", readOnly = Some True } ]
             }
           ]
         , volumes = if null Text (config.secretName)
           then None (List kubernetes.Volume.Type)
-          else Some [ kubernetes.Volume::{ name = "secret-volume", secret = Some kubernetes.SecretVolumeSource::{ secretName = config.secretName } } ]
+          else 
+            if config.secretTypeCsi
+            then
+              Some [ kubernetes.Volume::{ name = "secret-volume", csi = Some kubernetes.CSIVolumeSource::{ driver = "secrets-store.csi.k8s.io", readOnly = Some True, volumeAttributes = Some (toMap {secretProviderClass = default config.secretName }) } } ]
+            else
+              Some [ kubernetes.Volume::{ name = "secret-volume", secret = Some kubernetes.SecretVolumeSource::{ secretName = config.secretName } } ]  
+              
         }
       }
       

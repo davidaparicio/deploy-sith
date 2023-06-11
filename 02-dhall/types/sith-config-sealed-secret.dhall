@@ -1,4 +1,4 @@
---- ConfigSealedSecret
+--- sith-config-sealed-secret.dhall
 {
   Type =
   { 

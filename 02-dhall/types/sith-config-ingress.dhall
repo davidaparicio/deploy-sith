@@ -1,4 +1,4 @@
---- ConfigIngress
+--- sith-config-ingress.dhall
 {
   Type =
   { 
