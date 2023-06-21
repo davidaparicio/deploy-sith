@@ -64,7 +64,7 @@ spec:
       volumes:
         - name: secret-volume
           secret:
-            secretName: james-secrets
+            secretName: {{ .Values.secrets.nameOverride | default (include "balrog.fullname" .) }}
       {{- end }}
       {{- if or .Values.secretsStore.create }}
       volumes:

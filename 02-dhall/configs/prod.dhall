@@ -28,7 +28,7 @@ let deployment = ConfigDeploy::{
   portName = Some "web",
   environnement = Some "production",
   resources = {
-    requests = { cpu = "0.5", memory = "16Mi" },
+    requests = { cpu = "0.2", memory = "16Mi" },
     limits = { cpu = "1", memory = "32Mi" }
   },
   livenessProbe = { path = "/", port = Port.String "web" }

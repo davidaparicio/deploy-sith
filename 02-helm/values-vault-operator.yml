@@ -10,7 +10,8 @@ image:
   repository: registry.gitlab.com/gitops-heros/sith
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.3"
+  # FIXME (version à déployer)
+  tag: "0.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -67,7 +68,7 @@ resources:
     cpu: 1.2
     memory: 32Mi
   requests:
-    cpu: 0.4
+    cpu: 0.1
     memory: 16Mi
 
 autoscaling:
@@ -80,13 +81,16 @@ autoscaling:
 sealedSecrets:
   create: false
 
-secretsStore:
-  create: true
-  vaultAddress: "http://vault.vault:8200"
-
+# FIXME: Configure
+# 1. les annotations pour l'injection du secret via l'operator vault
+# 2. le "path" et la clef du secret dans vault
 secrets:
-  create: false
-  supersecret: changeme
+  nameOverride: "james-secret"
+  # FIXME (1)
+  annotations: {}
+  create: true
+  # FIXME (2)
+  supersecret: "TODO"
 
 nodeSelector: {}
 

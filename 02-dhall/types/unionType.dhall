@@ -2,6 +2,8 @@ let kubernetes = https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/v
 
 let SealedSecret = ./sealed-secret.dhall
 
-let ManifestUnion : Type = < Svc : kubernetes.Service.Type | Deploy : kubernetes.Deployment.Type | Ing : kubernetes.Ingress.Type  | Sealed : SealedSecret.Type >
+let SecretProviderClass = ./secret-provider-class.dhall
+
+let ManifestUnion : Type = < Svc : kubernetes.Service.Type | Deploy : kubernetes.Deployment.Type | Ing : kubernetes.Ingress.Type | Sec: kubernetes.Secret.Type | Sealed : SealedSecret.Type | SPC : SecretProviderClass.Type>
 
 in ManifestUnion

@@ -1,4 +1,4 @@
---- ConfigDeploy
+--- sith-config-deploy.dhall
 {
   Type =
   { 
@@ -15,12 +15,14 @@
       limits: {cpu: Text, memory: Text},
     },
     livenessProbe: {path: Text, port: < Int: Integer | String: Text >},
-    secretName: Optional Text
+    secretName: Optional Text,
+    secretTypeCsi: Bool
   },
   default =
   {
     portName = None Text,
     environnement = None Text,
-    secretName = None Text
+    secretName = None Text,
+    secretTypeCsi = False
   }
 }

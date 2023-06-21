@@ -1,4 +1,4 @@
---- ConfigSealedSecretType
+--- sith-config-sealed-secret-type.dhall
 let clusterWide = 
   Some (toMap { `sealedsecrets.bitnami.com/cluster-wide` = "true" })
 
