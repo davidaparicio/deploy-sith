@@ -44,7 +44,7 @@ let service = ConfigSvc::{
 }
 
 -- ingress (from svc)
-let ingress = Converters.configServiceToconfigIngress service "prod.127.0.0.1.sslip.io"
+let ingress = Converters.configServiceToconfigIngress service "prod.34.110.153.191.sslip.io"
 
 let config : Config = {deploy = deployment, svc = service, ing = ingress}
 

@@ -50,7 +50,7 @@ let service = ConfigSvc::{
 }
 
 -- ingress (from svc)
-let ingress = Converters.configServiceToconfigIngress service "secret.127.0.0.1.sslip.io"
+let ingress = Converters.configServiceToconfigIngress service "secret.34.110.153.191.sslip.io"
 
 
 -- sealed secret

@@ -4,10 +4,10 @@ kind: IngressRoute
 metadata:
   name: hello
   annotations:
-    link.argocd.argoproj.io/external-link: http://staging.127.0.0.1.sslip.io
+    link.argocd.argoproj.io/external-link: http://staging.34.110.153.191.sslip.io
 spec:
   routes:
-  - match: Host(`staging.127.0.0.1.sslip.io`)
+  - match: Host(`staging.34.110.153.191.sslip.io`)
     kind: Rule
     services:
     - name: hello
