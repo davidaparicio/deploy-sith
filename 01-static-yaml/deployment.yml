@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: registry.gitlab.com/gitops-heros/sith:0.1
+          image: registry.gitlab.com/gitops-heros/sith:1.0
           ports:
             - name: web
               containerPort: 8080
